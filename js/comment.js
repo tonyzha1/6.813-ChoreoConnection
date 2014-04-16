@@ -7,9 +7,12 @@ function TimedComment(text, author, start, end){
 	this.isTimed = true;
 }
 
-function displayComment(comment, id, parentSelector) { 
+function displayComment(comment, commentID, parentSelector) { 
+	if($("#TimedComment_"+commentID)) {
+		return; 
+	}
 	jQuery("<div/>", {
-		id:"TimedComment_"+id,
+		id:"TimedComment_"+commentID,
 		text:comment.Text, 
 	}).appendTo(parentSelector);
 }
@@ -20,7 +23,8 @@ function removeComment(commentID, parentSelector) {
 
 // Code starting here is lifted and adapted from Google Youtube API sandbox.
 google.load("swfobject", "2.1");
-comments = [];
+comments = [ new Comment("This is a comment", "I am the author", 25, 30), 
+			new Comment("WTF is this", "ARGH", 27, 32)];
 
 function updatePlayerInfo() {
 	var videoCommentSelector = "#comments";
